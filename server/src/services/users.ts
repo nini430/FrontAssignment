@@ -19,20 +19,25 @@ export const findUserLocation = (id: number) => {
   return users.findIndex((user: UserInput) => user.id === id);
 };
 
-
-
 export const getUsersPercentageForCountries = () => {
-  const users = getAllUsers();;
-  const populationPerCountry = [] as { type:string, value:number }[];
-  users.forEach((user:UserInput)=>{
-      const countryIndex=populationPerCountry.findIndex(item=>item.type===user.address.city)
-     if(countryIndex!==-1) {
-      populationPerCountry[countryIndex]={...populationPerCountry[countryIndex],value:populationPerCountry[countryIndex].value+1}
-     }else{
-      populationPerCountry.push({type:user.address.city,value:1});
-     }
-  })
-  const populationPercentage=populationPerCountry.map(item=>({...item,value:+(item.value/users.length*100).toFixed(2)}))
+  const users = getAllUsers();
+  const populationPerCountry = [] as { type: string; value: number }[];
+  users.forEach((user: UserInput) => {
+    const countryIndex = populationPerCountry.findIndex(
+      (item) => item.type === user.address.city
+    );
+    if (countryIndex !== -1) {
+      populationPerCountry[countryIndex] = {
+        ...populationPerCountry[countryIndex],
+        value: populationPerCountry[countryIndex].value + 1,
+      };
+    } else {
+      populationPerCountry.push({ type: user.address.city, value: 1 });
+    }
+  });
+  const populationPercentage = populationPerCountry.map((item) => ({
+    ...item,
+    value: +((item.value / users.length) * 100).toFixed(2),
+  }));
   return populationPercentage;
 };
-
