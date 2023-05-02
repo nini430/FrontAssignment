@@ -1,0 +1,23 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+input {
+    margin-bottom:10px !important;
+}
+
+.select {
+    width:100%;
+    margin-bottom:10px;
+}
+
+.alert {
+    margin-bottom: 10px;
+}
+
+.table-wrapper {
+    display: block;
+    overflow-x: auto;
+}
