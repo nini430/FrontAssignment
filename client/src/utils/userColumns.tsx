@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { DeleteRowOutlined } from '@ant-design/icons';
 import { User } from '../types/users';
@@ -44,7 +44,7 @@ const columns: ColumnsType<User> = [
     render(_,{id}) {
       const {deleteUser}=useUserStore.getState();
       return (
-        <Button onClick={()=>deleteUser(id)} danger icon={<DeleteRowOutlined />} size="middle">
+        <Button onClick={()=>{deleteUser(id);notification.success({message:'User Deleted',duration:3})}} danger icon={<DeleteRowOutlined />} size="middle">
           <a>Delete</a>
         </Button>
       );
