@@ -1,3 +1,4 @@
 export default {
-    port:3500
+    port:3500,
+    logLevel:'info'
 }
