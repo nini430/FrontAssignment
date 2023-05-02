@@ -1,6 +1,6 @@
 import {Request,Response} from 'express'
 import asyncHandler from 'express-async-handler'
-import { findUserLocation, getAllUsers,saveUsers } from '../services/users'
+import { findUserLocation, getAllUsers,getUsersPercentageForCountries,saveUsers } from '../services/users'
 import { UserInput } from '../types/users';
 import { NextFunction } from 'express-serve-static-core';
 import ErrorResponse from '../utils/ErrorResponse';
@@ -41,4 +41,7 @@ export const deleteUser=asyncHandler(async(req:Request<{id:string}>,res:Response
 })
 
 
-
+export const getUserStatisticForCountry=asyncHandler(async(req:Request,res:Response,next:NextFunction)=>{
+    const statisticData=getUsersPercentageForCountries();
+    return res.status(200).json({success:true,data:statisticData})
+})

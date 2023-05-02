@@ -18,9 +18,12 @@ export interface ResponseSuccess<T> {
 
 export interface UserInitialState {
     users:User[],
+    statistics:UserStatistics,
     getAllUsers:()=>Promise<void>;
     createNewUser:(input:User)=>Promise<void>
     updateUser:(input:User)=>Promise<void>
     deleteUser: (id: number)=>Promise<void>
+    getUserStatistics:()=>Promise<void>
 }
 
+export type UserStatistics={type: string;value:string}[]
