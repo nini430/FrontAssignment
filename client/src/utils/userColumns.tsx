@@ -41,10 +41,18 @@ const columns: ColumnsType<User> = [
   {
     title: 'Actions',
     key: 'actions',
-    render(_,{id}) {
-      const {deleteUser}=useUserStore.getState();
+    render(_, { id }) {
+      const { deleteUser } = useUserStore.getState();
       return (
-        <Button onClick={()=>{deleteUser(id);notification.success({message:'User Deleted',duration:3})}} danger icon={<DeleteRowOutlined />} size="middle">
+        <Button
+          onClick={() => {
+            deleteUser(id);
+            notification.success({ message: 'User Deleted', duration: 3 });
+          }}
+          danger
+          icon={<DeleteRowOutlined />}
+          size="middle"
+        >
           <a>Delete</a>
         </Button>
       );

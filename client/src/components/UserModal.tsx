@@ -1,4 +1,4 @@
-import { SetStateAction,useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { Modal, Divider, Form, Input, Select, Alert, notification } from 'antd';
 import { useFormik, getIn } from 'formik';
 import {
@@ -11,11 +11,11 @@ import { User } from '../types/users';
 interface IUserModalProps {
   open: boolean;
   onCancel: () => SetStateAction<void>;
-  record: User | null
+  record: User | null;
 }
 
 const UserModal = ({ open, onCancel, record }: IUserModalProps) => {
-  const { createNewUser, users,updateUser } = useUserStore();
+  const { createNewUser, users, updateUser } = useUserStore();
   const {
     setFieldValue,
     errors,
@@ -24,44 +24,48 @@ const UserModal = ({ open, onCancel, record }: IUserModalProps) => {
     touched,
     values,
     resetForm,
-    dirty
+    dirty,
   } = useFormik({
     initialValues: userFormInitialState,
     validationSchema: userValidationSchema,
     onSubmit: () => {
-      record?updateUser({...values,id:record.id}):createNewUser({ ...values, id: users.length + 1 });
-      notification.success({ message:`User ${record?'Updated':'Added'}`, duration: 3 });
+      record
+        ? updateUser({ ...values, id: record.id })
+        : createNewUser({ ...values, id: users.length + 1 });
+      notification.success({
+        message: `User ${record ? 'Updated' : 'Added'}`,
+        duration: 3,
+      });
       onCancel();
     },
   });
-  useEffect(()=>{
-    if(record) {
+  useEffect(() => {
+    if (record) {
       resetForm({
-        values:{
-          name:record.name,
-          email:record.email,
-          address:{
-            city:record.address.city,
-            street:record.address.street
+        values: {
+          name: record.name,
+          email: record.email,
+          address: {
+            city: record.address.city,
+            street: record.address.street,
           },
-          phone:record.phone,
-          gender:record.gender
-        }
-      })
+          phone: record.phone,
+          gender: record.gender,
+        },
+      });
     }
-  },[record,resetForm])
+  }, [record, resetForm]);
   return (
     <Modal
       okText="Save"
       okButtonProps={{
-        disabled:
-          Object.keys(errors).length > 0 || !dirty,
+        disabled: Object.keys(errors).length > 0 || !dirty,
       }}
       open={open}
       onCancel={onCancel}
       onOk={() => handleSubmit()}
     >
-      <h1>{record?'Update':'Add'} New User</h1>
+      <h1>{record ? 'Update' : 'Add'} New User</h1>
       <Divider />
       <Form>
         <Input

@@ -1,5 +1,10 @@
 import { create } from 'zustand';
-import { ResponseSuccess, User, UserInitialState, UserStatistics } from '../types/users';
+import {
+  ResponseSuccess,
+  User,
+  UserInitialState,
+  UserStatistics,
+} from '../types/users';
 import {
   createNewUserRequest,
   deleteUserRequest,
@@ -10,7 +15,7 @@ import {
 
 export const useUserStore = create<UserInitialState>((set) => ({
   users: [],
-  statistics:[],
+  statistics: [],
   getAllUsers: async () => {
     const res = await getAllUsersRequest();
     set({ users: res.data.data as ResponseSuccess<User[]>['data'] });
@@ -29,12 +34,14 @@ export const useUserStore = create<UserInitialState>((set) => ({
       ),
     }));
   },
-  deleteUser: async(id:number)=>{
+  deleteUser: async (id: number) => {
     await deleteUserRequest(id);
-    set(store=>({users:store.users.filter(user=>user.id!==id)}));
+    set((store) => ({ users: store.users.filter((user) => user.id !== id) }));
   },
-  getUserStatistics: async()=>{
-    const res=await getUserStatisticsRequest();
-    set({statistics:res.data.data as ResponseSuccess<UserStatistics>['data']})
-  }
+  getUserStatistics: async () => {
+    const res = await getUserStatisticsRequest();
+    set({
+      statistics: res.data.data as ResponseSuccess<UserStatistics>['data'],
+    });
+  },
 }));

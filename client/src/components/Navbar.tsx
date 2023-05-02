@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  return <Container>
-    <Link to='/'>User Information Database</Link>
-    <Link to='/statistics'>Statistics</Link>
-  </Container>;
+  return (
+    <Container>
+      <Link to="/">User Information Database</Link>
+      <Link to="/statistics">Statistics</Link>
+    </Container>
+  );
 };
 
 const Container = styled.div`
@@ -14,9 +16,9 @@ const Container = styled.div`
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   text-transform: uppercase;
-  gap:2rem;
+  gap: 2rem;
 `;
 
 export default Navbar;

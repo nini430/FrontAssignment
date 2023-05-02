@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import UserTable from './pages/UserTable';
 import Navbar from './components/Navbar';
-import Statistics from './pages/Statistics';
+import PieChart from './pages/PieChart';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/" element={<UserTable />} />
-          <Route path="/statistics" element={<Statistics/>} />
+          <Route path="/statistics" element={<PieChart />} />
         </Routes>
       </Wrapper>
     </Container>
